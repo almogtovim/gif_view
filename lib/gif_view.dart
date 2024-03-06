@@ -3,6 +3,7 @@ import 'dart:async';
 import 'dart:typed_data';
 import 'dart:ui';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:gif_view/src/gif_controller.dart';
@@ -70,6 +71,32 @@ class GifView extends StatefulWidget {
     double scale = 1.0,
     Map<String, String>? headers,
   })  : image = NetworkImage(url, scale: scale, headers: headers),
+        super(key: key);
+
+  GifView.cachedImage(
+    String url, {
+    Key? key,
+    this.controller,
+    this.frameRate,
+    this.height,
+    this.width,
+    this.progress,
+    this.fit,
+    this.color,
+    this.colorBlendMode,
+    this.alignment = Alignment.center,
+    this.repeat = ImageRepeat.noRepeat,
+    this.centerSlice,
+    this.matchTextDirection = false,
+    this.invertColors = false,
+    this.filterQuality = FilterQuality.low,
+    this.isAntiAlias = false,
+    this.withOpacityAnimation = true,
+    this.onError,
+    this.fadeDuration,
+    double scale = 1.0,
+    Map<String, String>? headers,
+  })  : image = CachedNetworkImageProvider(url, scale: scale, headers: headers),
         super(key: key);
 
   GifView.asset(
